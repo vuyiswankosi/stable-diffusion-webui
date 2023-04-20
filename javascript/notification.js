@@ -27,7 +27,8 @@ onUiUpdate(function(){
 
     // play notification sound if available
     gradioApp().querySelector('#audio_notification audio')?.play();
-
+    gradioApp().querySelector('#audio_notification audio').volume = 0.25;
+    
     if (document.hasFocus()) return;
 
     // Multiple copies of the images are in the DOM when one is selected. Dedup with a Set to get the real number generated.
@@ -46,4 +47,14 @@ onUiUpdate(function(){
         parent.focus();
         this.close();
     };
+});
+
+window.addEventListener("beforeunload", function(e)
+{
+  var message = "Are you sure you want to close the tab?";
+  
+  e.preventDefault();
+  e.returnValue = message;
+  
+  return message;
 });
